@@ -1,0 +1,18 @@
+<h2><%= @channel.name %></h2>
+
+<% @shows.each do |show|%>
+	<li>
+		<%= show.name %>
+		<% if show.favourites.first.present? %>
+			<button type="button">Already Favourite</button>
+		<% else %>
+			<%= form_for(@favourite) do |f| %>
+		        <%= f.hidden_field :like, :value => true %>
+		        <%= f.hidden_field :show_id, :value => show.id %>
+		        <%= f.submit "Mark as Favourite"%>
+		    <% end %>
+		<% end %>
+	</li>
+<% end %>
+
+<p><%= link_to "Back", root_path %></p>
